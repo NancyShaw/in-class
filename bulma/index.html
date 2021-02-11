@@ -126,7 +126,20 @@
         </div>
         <div class="column">First 2 columns are <i>is-one-quarter</i> wide.  
           This column does not have a width specified, so it will automatically fill the remaining space 
-          (in this case 1/2 of the screen).</div>
+          (in this case 1/2 of the screen).
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Card header
+              </p>
+              <button class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </header>
+          </div>
+        </div>
     </div>
     
     Example of 4 columns, using the 12 columns system:
@@ -151,15 +164,25 @@
     
   </section>
 
-  <!--Example of using jquery-->
+  <!--Example of using jquery. we can use jquery any time after we use it.
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <!--we imported jquery just above, so now we can use it-->
-  <script>
-    $(function(){
+  we imported jquery just above, so now we can use it-->
 
-      $(".card").css("backgroundColor", "green")
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"> 
 
-    })
+    //declaring a constant called age
+    const age = '29';
+    //console logging (view page, and inspect to see this)
+    console.log("Hi! This is an example of console logging!")
+    //back ticket surrounding string allow things like line breaks
+    // and templating: ${} 
+    console.log(`Hi! ${+age + 1} programmer! 
+    This is an example of console logging!`)
+    
+    //jQuery example
+    //$(function(){
+    //  $(".card").css("backgroundColor", "green")
+    //})
   </script>
   </body>
 </html>
