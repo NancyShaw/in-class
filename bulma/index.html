@@ -1,188 +1,191 @@
 <!DOCTYPE html>
-<html>
-  <!--html file for playing with bulma.io.  This is intended to be a learning/testing file.
+<html lang="en">
+<!--html file for playing with bulma.io.  This is intended to be a learning/testing file.
   A place to see what works, what doesn't, what I like or don't like.  A place to keep practical/working notes-->
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-  </head>
-  <body>
-  <section class="section">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img src="../images/triangles.png" width="112">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulma and Vue example</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+
+  <nav class="navbar container" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          Home
         </a>
-    
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+
+        <a class="navbar-item">
+          Documentation
         </a>
-      </div>
-    
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item">
-            Home
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
           </a>
-    
-          <a class="navbar-item">
-            Documentation
-          </a>
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              About
             </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-    
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
-            </div>
+            <a class="navbar-item">
+              Jobs
+            </a>
+            <a class="navbar-item">
+              Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+              Report an issue
+            </a>
           </div>
         </div>
       </div>
-    </nav>
 
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-      <a class="button is-primary is-rounded">
-          The Primary Button!
-      </a>
-      <a class="button is-info is-outlined">
-          The Info Button!
-      </a>
-      <a class="button is-danger is-large">
-          Danger, Will Robinson! Danger!
-      </a>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <div class="box has-background-primary">
-        I'm in a box.
-    </div>
+  </nav>
 
-    Example with 3 columns:
+
+  <div class="container" id="controlThis">
+
     <div class="columns">
-        <div class="column is-one-quarter">
-            <div class="box is-info">
-                Column containing box
+
+      <div class="column is-two-thirds">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Shop
+            </p>
+          </header>
+
+          <div class="card-content">
+
+            <div class="media" v-for="(x, i) in inventory">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                </figure>
+              </div>
+
+
+              <div class="media-content">
+                <button class="button is-small is-primary is-pulled-right" @click.prevent="add(i)">
+                  Add to Cart
+                </button>
+                <p class="title is-4">{{x.name}}</p>
+                <p class="subtitle is-6">${{x.price}}</p>
+              </div>
             </div>
-        </div>
-        <div class="column is-one-quarter">
-          <div class="card">
-            <div class="card-content">
-              <p class="title">
-                “There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.”
-              </p>
-              <p class="subtitle">
-                Jeff Atwood
-              </p>
-            </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <span>
-                  This is the footer content.
-                </span>
-              </p>
-              <p class="card-footer-item">
-                <span>
-                  More footer content.
-                </span>
-              </p>
-            </footer>
-          </div>  
-        </div>
-        <div class="column">First 2 columns are <i>is-one-quarter</i> wide.  
-          This column does not have a width specified, so it will automatically fill the remaining space 
-          (in this case 1/2 of the screen).
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                Card header
-              </p>
-              <button class="card-header-icon" aria-label="more options">
-                <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </header>
+
           </div>
         </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Cart
+            </p>
+          </header>
+
+          <table class="table is-striped is-narrow is-hoverable is-fullwidth">
+
+            <tr>
+              <th>Name</th>
+              <th>Qty</th>
+              <th>Cost</th>
+            </tr>
+
+
+            <tr v-for="(x, i) in cart">
+              <td>{{x.name}}</td>
+              <td>{{x.qty}}</td>
+              <td>{{x.price * x.qty}}</td>
+            </tr>
+
+
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th> {{ cart.reduce((tot, x) => tot + x.qty * x.price, 0 ) }} </th>
+            </tr>
+          </table>
+
+          <div class="card-content">
+
+
+            <button class="button is-success">Checkout</button>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    Example of 4 columns, using the 12 columns system:
-    <div class="columns">
-      <div class="column is-1">
-        First column. <br />
-        Column <i>is-1</i> wide.
-      </div>
-      <div class="column is-2">
-        Second column. <br />
-        Column <i>is-2</i> wide.
-      </div>
-      <div class="column is-3">
-        Third column. <br />
-        Column <i>is-3</i> wide.
-      </div>
-      <div class="column is-4">
-        Fourth column. <br />
-        Column <i>is-4</i> wide.
-      </div>
-    </div>
-    
-  </section>
+  </div>
 
-  <!--Example of using jquery. we can use jquery any time after we use it.
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  we imported jquery just above, so now we can use it-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"> 
+  <script>
+    const person1 = {
+      name: "John Doe",
+      age: 29,
+      address: {
+        street: '1 Mystery Place',
+        city: 'New Paltz',
+        state: 'NY',
+        zip: '12561'
+      }
+    };
 
-    //declaring a constant called age
-    const age = '29';
-    //console logging (view page, and inspect to see this)
-    console.log("Hi! This is an example of console logging!")
-    //back ticket surrounding string allow things like line breaks
-    // and templating: ${} 
-    console.log(`Hi! ${+age + 1} programmer! 
-    This is an example of console logging!`)
-    
-    //jQuery example
-    //$(function(){
-    //  $(".card").css("backgroundColor", "green")
-    //})
+    console.log({ person1 });
+
+    var app = new Vue({
+      el: '#controlThis',
+      data: {
+        inventory: [
+          { name: 'Shovel', price: 3.99 },
+          { name: 'Sled', price: 13.99 },
+          { name: 'Bag of Salt', price: 9.50 },
+          { name: 'Snow Blower', price: 399 },
+          { name: 'Skis', price: 83.99 },
+        ],
+        cart: []
+      },
+      methods: {
+        add(id) {
+          this.cart.push({ ... this.inventory[id], qty: 1 })
+        }
+      }
+    })
+
   </script>
-  </body>
+
+</body>
+
 </html>
