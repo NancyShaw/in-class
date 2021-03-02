@@ -1,7 +1,7 @@
 {
     "name": "in-class",
     "version": "1.0.0",
-    "private":"true",
+    "private": "true",
     "description": "Server package for in-class application for Web Server Programming class",
     "scripts": {
         "dev": "nodemon --watch server server/index.js",
