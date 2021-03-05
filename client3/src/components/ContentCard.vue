@@ -3,6 +3,7 @@
       <div class="card-content">
           <div class="media">
       <div class="media-left">
+        <!-- is-48x48 keeps the user image square-->
         <figure class="image is-48x48">
           <img 
           :src="post.user.pic" 
@@ -16,7 +17,8 @@
     </div>
       </div>
   <div class="card-image">
-    <figure class="image is-4by3">
+    <!-- we don't want an image ratio here, otherwise image aspect ratio will get smooshed -->
+    <figure class="image">
       <img :src="post.src" :alt="post.alt">
     </figure>
   </div>

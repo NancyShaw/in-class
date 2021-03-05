@@ -2,6 +2,9 @@
   <div id="my-wall">
       <div class="columns">
           <div class="column is-one-quarter">
+              <div class="content-item">
+                  <FriendsShort />
+              </div>
           </div>
           <div class="column">
               <div class="content-item">
@@ -89,7 +92,13 @@
                   <ContentCard :post="post"/>
               </div>
           </div>
-          <div class="column is-one-quarter"></div>
+          <div class="column is-one-quarter">
+              <pre>
+                  <div class="content-item">
+                  <ContentCard :post="newPost"/>
+                    </div>
+              </pre>
+          </div>
       </div>
   </div>
 </template>

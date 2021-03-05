@@ -1,16 +1,21 @@
-//example from Node.js
+const path = require('path');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
-const http = require('http');
+app
+    .use(express.static('./docs'))
+    .get('/', (req, res) => {
+    res.send('Hello World!')
+    })
+    .get('/purim', (req, res) => {
+        res.send('Lechaim, to life!');
+    })
+    // all the way at the end of the pipeline. return instead of not found.
+    .get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../docs/index.html') );
+    })
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello Universe!');
-});
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})    
