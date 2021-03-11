@@ -3,6 +3,9 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Documentation from '@/views/Documentation.vue';
 import MyWall from '@/views/MyWall.vue';
+import MyFeed from '@/views/MyFeed.vue';
+import Login from '@/views/Login.vue'
+import Session from '../models/Session';
 
 //both the ../ path and the @/ path both get us to the files
 
@@ -17,7 +20,9 @@ const routes = [
     component: Home
   },
   {path: '/documentation', name: 'Doc', component: Documentation },
+  {path: '/login', name: 'Login', component: Login },
   {path: '/mywall', name: 'MyWall', component: MyWall },
+  {path: '/feed', name: 'MyFeed', component: MyFeed },
   {
     path: '/about',
     name: 'About',
@@ -38,5 +43,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach( (to, from, next) => {
+  console.log({ from, to })
+  if(to.path == '/mywall' && !Session.user){
+    next('/login')
+  }else{
+    next();
+  }
+} )
 
 export default router

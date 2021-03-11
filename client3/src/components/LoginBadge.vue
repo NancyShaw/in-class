@@ -3,18 +3,18 @@
         <a class="button is-primary">
             <strong>Sign up</strong>
         </a>
-        <a class="button is-light"> Log in </a>
+        <a class="button is-light" @click="login"> Log in </a>
     </div>
     <div v-else>
         Hello John Doe
         (<a @click="logout">
-            logout
+            Log out
         </a>)
     </div>
 </template>
 
 <script>
-import Session from "../models/Session"
+import Session, { Login, Logout } from "../models/Session"
 export default {
     data(){
         return {
@@ -23,10 +23,10 @@ export default {
     },
     methods: {
         login(){
-            this.Session.user = { name: "John Doe"}        
+            Login();       
         },
         logout(){
-            this.Session.user = null
+            Logout();
         }
     }
 

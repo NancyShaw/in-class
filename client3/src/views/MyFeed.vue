@@ -7,40 +7,39 @@
               </div>
           </div>
           <div class="column">
+
               <div class="content-item">
                   <content-creation :newPost="newPost" @add="addPost" />
               </div>
+
               <div class="content-item" v-for="(post, i) in posts" :key="i">
-                  <ContentCard :post="post" @delete="deletePost(i)" />
+                <ContentCard :post="post" @delete="deletePost(i)" />
               </div>
           </div>
           <div class="column is-one-quarter">
-              <pre>
-                  <div class="content-item">
-                  <ContentCard :post="newPost"/>
-                    </div>
-              </pre>
+              <div class="content-item">
+                <ContentCard :post="newPost" />
+              </div>
+
           </div>
       </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import ContentCard from "../components/ContentCard";
 import ContentCreation from '../components/ContentCreation.vue';
-import Vue from "vue";
-import { GetMyPosts } from "../models/Posts";
-
+import { GetMyFeed } from "../models/Posts";
 export default Vue.extend({
     data: ()=> ({
-      newPost: { 
-          user: {
-          }
-      },  
-      posts: []  
+        newPost: {
+            user: { }
+        },
+        posts: []
     }),
     mounted() {
-        this.posts = GetMyPosts();
+        this.posts = GetMyFeed();
     },
     components: {
         ContentCard,
