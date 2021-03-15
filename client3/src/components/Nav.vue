@@ -19,8 +19,9 @@
 
     <div class="navbar-menu" :class="{ 'is-active': isActive }">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Feed</router-link>
+        <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/MyWall" class="navbar-item">My Wall</router-link>
+        <router-link to="/MyFeed" class="navbar-item">Feed</router-link>
         <router-link to="/Documentation" class="navbar-item">Documentation</router-link>
 
         <div class="navbar-item has-dropdown is-hoverable">

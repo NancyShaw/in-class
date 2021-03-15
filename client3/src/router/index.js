@@ -14,11 +14,7 @@ Vue.use(VueRouter)
 //Home and Documentation are being statically linked
 //About and Shop are being dynamically linked
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+  {path: '/', name: 'Home', component: Home },
   {path: '/documentation', name: 'Doc', component: Documentation },
   {path: '/login', name: 'Login', component: Login },
   {path: '/mywall', name: 'MyWall', component: MyWall },
