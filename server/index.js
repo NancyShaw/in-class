@@ -7,6 +7,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app
+    .use(express.json())
+    //this path happens relative to where the execution of the application 
+    //is happening, not relative to this file
     .use(express.static('./docs'))
 
     .use('/users', usersCtrl)
