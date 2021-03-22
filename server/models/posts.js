@@ -30,25 +30,24 @@ module.exports.GetAll = ()=> list.map(function name(x, i) {
     return { ...x, user: user.GetByHandle(x.user_handle) }
 });
 module.exports.Get = (post_id)=> list[post_id];
-module.exports.Create = (post)=> {
+module.exports.Add = (post)=> {
     if (!post.user_handle) {
         throw "Post must have an Owner!"
     }
     list.push(post);
     
-    return post;
+    return { ...post };
 }
 
-module.exports.Update = (post_id, user)=> {
+module.exports.Update = (post_id, post)=> {
     const oldObj = list[post_id];
     const newObj = {...oldObj, ...post }
     list[post_id] = newObj;
-    //this returns a copy of oldObj, 
     return newObj;
 }
 
 module.exports.Delete = (post_id)=> {
-    const user = list[post_id];
+    const post = list[post_id];
     list.splice(post_id, 1);
     return post;
 }

@@ -14,6 +14,7 @@ app
     //is happening, not relative to this file
     .use(express.static('./docs'))
 
+    //mounting our controllers
     .use('/users', usersCtrl)
     .use('/posts', postsctrl)
 
