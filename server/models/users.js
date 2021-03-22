@@ -25,10 +25,9 @@ const list = [
 ];
 
 module.exports.GetAll = ()=> list;
-
 module.exports.Get = (user_id)=> list[user_id];
-
-module.exports.Create = (user)=> {
+module.exports.GetByHandle = (handle)=> ({ ...list.find( (x, i)=> x.handle == handle ), password: undefined });
+module.exports.Add = (user)=> {
     if (!user.firstName) {
         throw "First name is required!"
     }
