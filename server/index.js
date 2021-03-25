@@ -23,6 +23,11 @@ app
       res.sendFile(path.join(__dirname, '../docs/index.html') );
     })
 
+    .use((error, req, res, next)=>{ 
+      res.status(error_code || 500);
+      res.send( error );
+    })
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })    

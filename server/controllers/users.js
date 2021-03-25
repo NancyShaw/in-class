@@ -12,7 +12,10 @@ const app = express.Router();
         // : means match to anything (ie, users/ anything)
         .get('/:post_id',(req,res)=> res.send( model.Get(req.params.post_id) ))
         .post('/', (req, res)=> { 
-            res.send( model.Add(req.body) );
+            res.send( model.Add(req.body) )
+        })
+        .post('./login', (req, res)=> {
+            model.Login(req.body.handle, req.body.password)
         })
         .patch('/:post_id',(req,res)=> res.send(
             model.Update(req.params.user_id, req.body)
