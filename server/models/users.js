@@ -1,5 +1,7 @@
 /** */
 
+const bcrypt = require('bcrypt');
+
 const list = [
     {
         firstName: 'John',
@@ -29,13 +31,27 @@ module.exports.Get = (user_id)=> list[user_id];
 module.exports.GetByHandle = (handle)=> ({ ...list.find( (x, i)=> x.handle == handle ), password: undefined });
 module.exports.Add = (user)=> {
     if (!user.firstName) {
-        throw "First name is required!"
+        throw { code: 422, msg: "First name is required!" }
     }
     list.push(user);
     //this returns a copy of user without the password
     return { ...user, password: undefined };
 }
+// if the word 'async' is there, function will return a promise
+module.exports.Register = async (user)=> {
 
+    const hash = await bcrypt.hash(user.password, 8);
+    
+    user.password = hash;
+
+    if (!user.firstName) {
+        throw { code: 422, msg: "First name is required!" }
+    }
+    list.push(user);
+    //this returns a copy of user without the password
+    return { ...user, password: undefined };
+    
+}
 module.exports.Update = (user_id, user)=> {
     const oldObj = list[user_id];
     if (user.firstName) {

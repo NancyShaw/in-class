@@ -26,9 +26,10 @@ const list = [
     }
 ];
 
-module.exports.GetAll = ()=> list.map(function name(x, i) {
-    return { ...x, user: user.GetByHandle(x.user_handle) }
-});
+module.exports.GetAll = ()=> list.map((x, i) => ({
+    ...x,
+    user: user.GetByHandle(x.user_handle)
+}) );
 module.exports.Get = (post_id)=> list[post_id];
 module.exports.Add = (post)=> {
     if (!post.user_handle) {

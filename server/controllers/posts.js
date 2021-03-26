@@ -7,19 +7,17 @@ const app = express.Router();
 
     app
         .get('/', (req, res) =>{
-            res.send( model.GetAll() );
-            console.log(req.headers);            
+            res.send( model.GetAll() );            
         }  )
         // : means match to anything (ie, users/ anything)
         .get('/:post_id',(req,res)=> res.send( model.Get(req.params.post_id) ))
         .post('/', (req, res)=> { 
             res.send( model.Add(req.body) );
-            console.log(req.headers);
         })
-        .patch('/:post_id',(req,res)=> res.send(
-            model.Update(req.params.post_id, req.body)
+        .patch('/:post_id', (req,res)=> res.send(
+            model.Update( req.params.post_id, req.body)
         ))
-        .delete('/post_id',(req,res)=> res.send(model.Delete(req.params.post_id) ) )
+        .delete('/post_id', (req,res)=> res.send(model.Delete(req.params.post_id) ) )
         
 
 module.exports = app;
