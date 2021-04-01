@@ -1,22 +1,32 @@
 const path = require('path');
 const express = require('express');
+const dotenv = require('dotenv');
+dotenv.config();
 
+const { LoginRequired } = require('./controllers/security');
 const usersCtrl = require('./controllers/users');
 const postsctrl = require('./controllers/posts');
+const usersModel = require('./models/users');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app
     .use(express.json())
-    .use(express.urlencoded({ extended: true }))
     //this path happens relative to where the execution of the application 
     //is happening, not relative to this file
     .use(express.static('./docs'))
 
+    .use((req, res, next)=> {
+
+        const token = req.headers.authorization?.split(' ')[1];
+        req.user = token && usersModel.FromJWT(token);
+        next();
+    })
+
     //mounting our controllers
     .use('/users', usersCtrl)
-    .use('/posts', postsctrl)
+    .use('/posts', LoginRequired, postsctrl)
 
     // all the way at the end of the pipeline. return instead of not found.
     .get('*', (req, res) => {
