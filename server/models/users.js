@@ -13,6 +13,9 @@ const list = [
         handle: '@Mystery',
         pic: 'https://bulma.io/images/placeholders/96x96.png',
         password: 'notgood',
+        isAdmin: false,
+        following: [ {handle: '@ChiefEngineer', isApproved: true} ],
+        isPublic: true,
     },
     {
         firstName: 'LaForge',
@@ -20,6 +23,9 @@ const list = [
         handle: "@ChiefEngineer",
         pic: "https://bulma.io/images/placeholders/96x96.png",
         password: 'plaintext',
+        isAdmin: true,
+        following: [ {handle: '@MakeItSo', isApproved: true}, {handle: '@Mystery', isApproved: true} ],
+        isPublic: true,
     },
     {
         firstName: 'Captain',
@@ -27,6 +33,9 @@ const list = [
         handle: "@MakeItSo",
         pic: "https://bulma.io/images/placeholders/96x96.png",
         password: 'insecure',
+        isAdmin: true,
+        following: [ {handle: '@ChiefEngineer', isApproved: true}, {handle: '@Mystery', isApproved: true} ],
+        isPublic: true,
     }
 ];
 
@@ -53,7 +62,8 @@ module.exports.Register = async (user)=> {
     }
     list.push(user);
     //this returns a copy of user without the password
-    return { ...user, password: undefined };
+    //return { ...user, password: undefined };
+    return { ...user };
     
 }
 module.exports.Update = (user_id, user)=> {
@@ -89,10 +99,10 @@ module.exports.Login = async (handle, password) => {
     }
 
     const data = { ...user, password: undefined };
-
+    
     const token = jwt.sign(data, JWT_SECRET);
 
-    return {user, token};
+    return { user: data, token };
 }
 
 module.exports.FromJWT = async (token) => {

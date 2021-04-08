@@ -17,10 +17,12 @@ app
     //is happening, not relative to this file
     .use(express.static('./docs'))
 
-    .use((req, res, next)=> {
+    //as every request comes in to pipeline this checked the auth header
+    .use(async (req, res, next)=> {
 
         const token = req.headers.authorization?.split(' ')[1];
-        req.user = token && usersModel.FromJWT(token);
+        
+        req.user = token && await usersModel.FromJWT(token);
         next();
     })
 

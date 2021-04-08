@@ -9,27 +9,43 @@ const list = [
     caption: `Make it so`,
     time: Date(),
     user_handle: "@MakeItSo",
+    isPublic: true,
     },
     { 
     src: "https://bulma.io/images/placeholders/1280x960.png",
     alt: "Placeholder image",
     caption: `Running test simulations on the Holodeck`,
     time: Date(),
-    user_handle: "@Engineer" 
+    user_handle: "@Engineer",
+    isPublic: true, 
     },
     { 
     src: "https://bulma.io/images/placeholders/1280x960.png",
     alt: "Placeholder image",
-    caption: `Live long and prosper`,
+    caption: `Dringing tea and reading crew reports`,
     time: Date(),
-    user_handle: "@Logical"
+    user_handle: "@MakeItSo",
+    isPublic: true,
     }
 ];
 
-module.exports.GetAll = ()=> list.map((x, i) => ({
+const listWithOwner = ()=> list.map((x, i) => ({
     ...x,
     user: user.GetByHandle(x.user_handle)
 }) );
+
+module.exports.GetAll = ()=> {
+    return listWithOwner();
+}
+
+module.exports.GetWall = (handle)=> {
+    return listWithOwner().filter(post=> post.user_handle == handle);
+}
+
+module.exports.GetFeed = (handle)=> {
+    listWithOwner().filter(post=> users.GetByHandle(handle).following).some(f=> f.handle == post.user_handle && f.isApproved) ;
+}
+
 module.exports.Get = (post_id)=> list[post_id];
 module.exports.Add = (post)=> {
     if (!post.user_handle) {
