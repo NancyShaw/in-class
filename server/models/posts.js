@@ -16,7 +16,7 @@ const list = [
     alt: "Placeholder image",
     caption: `Running test simulations on the Holodeck`,
     time: Date(),
-    user_handle: "@Engineer",
+    user_handle: "@ChiefEngineer",
     isPublic: true, 
     },
     { 
@@ -31,7 +31,7 @@ const list = [
 
 const listWithOwner = ()=> list.map((x, i) => ({
     ...x,
-    user: user.GetByHandle(x.user_handle)
+    user: users.GetByHandle(x.user_handle)
 }) );
 
 module.exports.GetAll = ()=> {

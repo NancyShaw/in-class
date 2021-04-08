@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -16,6 +17,7 @@ app
     //this path happens relative to where the execution of the application 
     //is happening, not relative to this file
     .use(express.static('./docs'))
+    .use(cors())
 
     //as every request comes in to pipeline this checked the auth header
     .use(async (req, res, next)=> {
@@ -23,12 +25,14 @@ app
         const token = req.headers.authorization?.split(' ')[1];
         
         req.user = token && await usersModel.FromJWT(token);
+        req.user = {isAdmin: true}
         next();
     })
 
     //mounting our controllers
     .use('/users', usersCtrl)
     .use('/posts', LoginRequired, postsctrl)
+    
 
     // all the way at the end of the pipeline. return instead of not found.
     .get('*', (req, res) => {
