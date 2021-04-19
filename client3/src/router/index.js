@@ -4,7 +4,8 @@ import Home from '../views/Home.vue';
 import Documentation from '@/views/Documentation.vue';
 import MyWall from '@/views/MyWall.vue';
 import MyFeed from '@/views/MyFeed.vue';
-import Login from '@/views/Login.vue'
+import Login from '@/views/Login.vue';
+import Users from '@/views/Users.vue'
 import Session from '../models/Session';
 
 //both the ../ path and the @/ path both get us to the files
@@ -19,6 +20,7 @@ const routes = [
   {path: '/login', name: 'Login', component: Login },
   {path: '/mywall', name: 'MyWall', component: MyWall },
   {path: '/feed', name: 'MyFeed', component: MyFeed },
+  {path: '/users', name: 'Users', component: Users },
   {
     path: '/about',
     name: 'About',
