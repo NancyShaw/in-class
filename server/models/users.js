@@ -32,7 +32,7 @@ const list = [
         lastName: 'Picard',
         handle: "@MakeItSo",
         pic: "https://bulma.io/images/placeholders/96x96.png",
-        password: 'insecure',
+        password: '$2b$08$8QCN5ETTfBdTXlON/uRbYuiS3Yn2oT5N/4NHwxf4iMeRjQ1.GiXaO',
         isAdmin: true,
         following: [ {handle: '@ChiefEngineer', isApproved: true}, {handle: '@Mystery', isApproved: true} ],
         isPublic: true,

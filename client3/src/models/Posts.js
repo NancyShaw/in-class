@@ -16,3 +16,13 @@ export function GetMyPosts(){
 export function GetMyFeed() {
     return api("posts/feed");
 }
+
+export function AddPost(post) {
+    return api("posts", post);
+}
+
+export function DeletePost(post_id) {
+    // This won't actually delete the correct item unless you are an administrator viewing all posts
+    // TODO: add real ids to the posts so that we can address them properly
+    return api("posts/" + post_id, { }, "DELETE");
+}

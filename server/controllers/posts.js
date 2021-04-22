@@ -13,6 +13,9 @@ const app = express.Router();
                 res.send( model.GetWall( req.user.handle) );
             }            
         }  )
+        .get('/feed', (req, res) =>{
+                res.send( model.GetFeed(req.user.handle) );         
+        }  )
         // : means match to anything (ie, users/ anything)
         .get('/:post_id',(req,res)=> {
             if(+req.params.post_id) {
