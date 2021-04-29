@@ -28,6 +28,19 @@ export async function Login(handle, password) {
     router.push(Session.nextRoute ?? '/feed');
 }
 
+export async function LoginFB(access_token) {
+    const {user, token} = await api('users/loginFB', { access_token });
+    Session.token = token;
+    Session.user = user;
+    console.log(Session.user);
+    toastr.open({
+        type: "is-success",
+        message: 'Welcome ${Session.user.firstName}'
+    });
+
+    router.push(Session.nextRoute ?? '/feed');
+}
+
 export function Logout() {
     Session.user = null
 }

@@ -2,6 +2,7 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const axios = require('axios').default;
 
 const SALT_ROUNDS = process.env.SALT_ROUNDS;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -97,6 +98,32 @@ module.exports.Login = async (handle, password) => {
     if(! await bcrypt.compare(password, user.password) ) {
         throw { code: 401, msg: "Wrong Username or Password" };
     }
+
+    const data = { ...user, password: undefined };
+    
+    const token = jwt.sign(data, JWT_SECRET);
+
+    return { user: data, token };
+}
+
+module.exports.LoginFB = async (access_token) => {
+    console.log(access_token);
+
+    //const userFB = await axios.get('curl command copied from graph.facebook.com');
+    //console.log(userFB.data);
+
+    // Get a verified email address from FB
+    let user = list.find(x=> x.email == email);
+    if(!user) { 
+        //create a new user based on the data provided from FB
+        user = {
+            firstName: userFB.data.first_name,
+            lastName: userFB.data.last_name,
+            pic: userFB.data.picture.data.url,
+            email: userFB.data.email
+        };
+        list.push(user);
+    };
 
     const data = { ...user, password: undefined };
     
