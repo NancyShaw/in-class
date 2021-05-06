@@ -42,8 +42,9 @@ module.exports.GetWall = (handle)=> {
     return listWithOwner().filter(post=> post.user_handle == handle);
 }
 
-module.exports.GetFeed = (handle)=> {
-    listWithOwner().filter(post=> users.GetByHandle(handle).following).some(f=> f.handle == post.user_handle && f.isApproved) ;
+module.exports.GetFeed = (handle)=> { 
+    return listWithOwner()
+    .filter(post=> users.GetByHandle(handle).following.some(f=> f.handle == post.user_handle && f.isApproved) );
 }
 
 module.exports.Get = (post_id)=> list[post_id];
